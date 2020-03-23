@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Layout } from 'antd';
+import { Alert, Layout } from 'antd';
 
 import Footer from '../components/Footer';
 
@@ -19,7 +19,9 @@ const Component = ({ location }) => {
   return (
     <Layout className={classes.fullHeight}>
       <Layout.Content>
-        <View />
+        <Alert.ErrorBoundary>
+          <View />
+        </Alert.ErrorBoundary>
       </Layout.Content>
 
       <Layout.Footer>

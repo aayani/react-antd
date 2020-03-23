@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Layout } from 'antd';
+import { Layout, Alert } from 'antd';
 
 import Header from '../components/Header';
 import Footer from '../components/Footer';
@@ -24,7 +24,9 @@ const Component = ({ location, menuItems, activeKey }) => {
       </Layout.Header>
 
       <Layout.Content>
-        <View />
+        <Alert.ErrorBoundary>
+          <View />
+        </Alert.ErrorBoundary>
       </Layout.Content>
 
       <Layout.Footer>
