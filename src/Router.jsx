@@ -10,7 +10,7 @@ import {
 import AuthLayout from './layouts/Auth';
 import AdminLayout from './layouts/Admin';
 
-import { useStateValue } from './config/state';
+import { useStateValue } from './config/store';
 
 const Component = () => {
   const [{ me }] = useStateValue();
