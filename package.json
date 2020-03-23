@@ -10,12 +10,16 @@
     "format": "eslint src --fix"
   },
   "dependencies": {
+    "@ant-design/icons": "^4.0.3",
     "@testing-library/dom": "^7.1.0",
     "@testing-library/jest-dom": "^5.1.1",
     "@testing-library/react": "^10.0.1",
     "@testing-library/user-event": "^10.0.0",
-    "antd": "^3.26.7",
+    "antd": "^4.0.3",
     "aphrodite": "^2.4.0",
+    "chalk": "^3.0.0",
+    "dayjs": "^1.8.23",
+    "moment": "^2.24.0",
     "prop-types": "^15.7.2",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",

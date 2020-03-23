@@ -1,54 +1,46 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Form, Icon, Input, Button, Checkbox } from 'antd';
+import { Form, Input, Button } from 'antd';
+import { UserOutlined, LockOutlined } from '@ant-design/icons';
 
+import logger from '../../../utils/logger';
 import classes from '../../../assets/classes';
 
-const Component = ({ form, message, onSubmit, submitting }) => {
-  const { getFieldDecorator } = form;
+const Component = ({ message, onSubmit, submitting, initialValues }) => {
+  const [form] = Form.useForm();
 
-  const handleSubmit = e => {
-    e.preventDefault();
-
-    form.validateFields((err, values) => {
-      if (!err) {
-        onSubmit(values);
-      }
-    });
+  const handleFailure = err => {
+    logger.error(err, 'views/Login/components/LoginForm');
   };
 
   return (
-    <Form onSubmit={handleSubmit} className={classes.loginForm}>
-      <Form.Item>
-        {getFieldDecorator('username', {
-          rules: [{ required: true, message: 'Please input your username!' }],
-        })(
-          <Input
-            prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />}
-            placeholder="Username"
-          />
-        )}
+    <Form
+      form={form}
+      onFinish={onSubmit}
+      onInvalid={handleFailure}
+      className={classes.loginForm}
+      initialValues={initialValues}
+    >
+      <Form.Item name="username">
+        <Input
+          prefix={<UserOutlined style={{ color: 'rgba(0,0,0,.25)' }} />}
+          placeholder="Username"
+          rules={[{ required: true, message: 'Please input your username' }]}
+        />
       </Form.Item>
 
-      <Form.Item>
-        {getFieldDecorator('password', {
-          rules: [{ required: true, message: 'Please input your Password!' }],
-        })(
-          <Input
-            prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />}
-            type="password"
-            placeholder="Password"
-          />
-        )}
+      <Form.Item name="password">
+        <Input
+          type="password"
+          prefix={<LockOutlined style={{ color: 'rgba(0,0,0,.25)' }} />}
+          placeholder="Password"
+          rules={[{ required: true, message: 'Please input your password' }]}
+        />
       </Form.Item>
 
       <Form.Item className={message ? '' : classes.hidden}>{message}</Form.Item>
 
       <Form.Item>
-        {getFieldDecorator('remember', {
-          valuePropName: 'checked',
-          initialValue: true,
-        })(<Checkbox>Remember me</Checkbox>)}
         <Button type="link" className={classes.pullRight}>
           Forgot password
         </Button>
@@ -68,18 +60,22 @@ const Component = ({ form, message, onSubmit, submitting }) => {
 };
 
 Component.propTypes = {
-  form: PropTypes.shape({
-    validateFields: PropTypes.func.isRequired,
-    getFieldDecorator: PropTypes.func.isRequired,
-  }).isRequired,
-  onSubmit: PropTypes.func.isRequired,
-  submitting: PropTypes.bool,
   message: PropTypes.string,
+  submitting: PropTypes.bool,
+  onSubmit: PropTypes.func.isRequired,
+  initialValues: PropTypes.shape({
+    username: PropTypes.string,
+    password: PropTypes.string,
+  }),
 };
 
 Component.defaultProps = {
-  submitting: false,
   message: null,
+  submitting: false,
+  initialValues: {
+    username: '',
+    password: '',
+  },
 };
 
 export default Component;

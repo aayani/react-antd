@@ -1,22 +1,31 @@
 import React from 'react';
-import { Form } from 'antd';
 
 import LoginForm from './components/LoginForm';
 
-const FormView = Form.create()(LoginForm);
+import logger from '../../utils/logger';
 
 const Component = () => {
-  const [message] = React.useState(null);
-  const [submitting] = React.useState(false);
+  const [state, setState] = React.useState({
+    message: null,
+    submitting: false,
+  });
 
-  const login = values => {
-    console.log(values);
+  const doLogin = values => {
+    logger.info(JSON.stringify(values), 'views/Login');
+    setState({
+      ...state,
+      submitting: true,
+    });
   };
 
   return (
-    <div>
-      <FormView onSubmit={login} submitting={submitting} message={message} />
-    </div>
+    <>
+      <LoginForm
+        onSubmit={doLogin}
+        submitting={state.submitting}
+        message={state.message}
+      />
+    </>
   );
 };
 
