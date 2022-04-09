@@ -19,7 +19,7 @@
     "aphrodite": "^2.4.0",
     "chalk": "^4.1.0",
     "dayjs": "^1.8.29",
-    "moment": "^2.27.0",
+    "moment": "^2.29.2",
     "prop-types": "^15.7.2",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
